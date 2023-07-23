@@ -11,10 +11,15 @@ router.post(
 );
 
 // /api/v1/airports?trips=MUN-DEL GET
-router.get(
-	'/',
-	FlightController.getAllFlights
-);
+router.get('/', FlightController.getAllFlights);
 
+router.get('/:id', FlightController.getFlight);
+
+// /api/v1/flights.seats PATCH
+router.patch(
+	'/:id/seats',
+	FlightMiddlewares.validateUpdateSeatRequest,
+	FlightController.updateSeats
+);
 
 module.exports = router;
